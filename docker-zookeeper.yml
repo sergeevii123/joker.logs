@@ -1,0 +1,90 @@
+version: '2'
+
+services:
+  zookeeper0:
+    build: docker-zookeeper
+    domainname: poc
+    hostname: zookeeper0
+    ports:
+      - "2181:2181"
+      - "2888:2888"
+      - "3888:3888"
+    links:
+      - zookeeper1
+      - zookeeper2
+    environment:
+      SERVICE_NAME: zookeeper
+      CONTAINER_NAME: zookeeper0
+      ZOOKEEPER_SERVER_IDS: zookeeper0:1,zookeeper1:2,zookeeper2:3
+      ZOOKEEPER_INSTANCES: zookeeper0,zookeeper1,zookeeper2
+      ZOOKEEPER_ZOOKEEPER0_HOST: zookeeper0
+      ZOOKEEPER_ZOOKEEPER0_CLIENT_PORT: 2181
+      ZOOKEEPER_ZOOKEEPER0_PEER_PORT: 2888
+      ZOOKEEPER_ZOOKEEPER0_LEADER_ELECTION_PORT: 3888
+      ZOOKEEPER_ZOOKEEPER1_HOST: zookeeper1
+      ZOOKEEPER_ZOOKEEPER1_CLIENT_PORT: 2181
+      ZOOKEEPER_ZOOKEEPER1_PEER_PORT: 2888
+      ZOOKEEPER_ZOOKEEPER1_LEADER_ELECTION_PORT: 3888
+      ZOOKEEPER_ZOOKEEPER2_HOST: zookeeper2
+      ZOOKEEPER_ZOOKEEPER2_CLIENT_PORT: 2181
+      ZOOKEEPER_ZOOKEEPER2_PEER_PORT: 2888
+      ZOOKEEPER_ZOOKEEPER2_LEADER_ELECTION_PORT: 3888
+
+  zookeeper1:
+    build: docker-zookeeper
+    domainname: poc
+    hostname: zookeeper1
+    ports:
+      - "2182:2181"
+      - "2889:2888"
+      - "3889:3888"
+    environment:
+      SERVICE_NAME: zookeeper
+      CONTAINER_NAME: zookeeper1
+      ZOOKEEPER_SERVER_IDS: zookeeper0:1,zookeeper1:2,zookeeper2:3
+      ZOOKEEPER_INSTANCES: zookeeper0,zookeeper1,zookeeper2
+      ZOOKEEPER_ZOOKEEPER0_HOST: zookeeper0
+      ZOOKEEPER_ZOOKEEPER0_CLIENT_PORT: 2181
+      ZOOKEEPER_ZOOKEEPER0_PEER_PORT: 2888
+      ZOOKEEPER_ZOOKEEPER0_LEADER_ELECTION_PORT: 3888
+      ZOOKEEPER_ZOOKEEPER1_HOST: zookeeper1
+      ZOOKEEPER_ZOOKEEPER1_CLIENT_PORT: 2181
+      ZOOKEEPER_ZOOKEEPER1_PEER_PORT: 2888
+      ZOOKEEPER_ZOOKEEPER1_LEADER_ELECTION_PORT: 3888
+      ZOOKEEPER_ZOOKEEPER2_HOST: zookeeper2
+      ZOOKEEPER_ZOOKEEPER2_CLIENT_PORT: 2181
+      ZOOKEEPER_ZOOKEEPER2_PEER_PORT: 2888
+      ZOOKEEPER_ZOOKEEPER2_LEADER_ELECTION_PORT: 3888
+
+  zookeeper2:
+    build: docker-zookeeper
+    domainname: poc
+    hostname: zookeeper2
+    ports:
+      - "2183:2181"
+      - "2890:2888"
+      - "3890:3888"
+    environment:
+      SERVICE_NAME: zookeeper
+      CONTAINER_NAME: zookeeper2
+      ZOOKEEPER_SERVER_IDS: zookeeper0:1,zookeeper1:2,zookeeper2:3
+      ZOOKEEPER_INSTANCES: zookeeper0,zookeeper1,zookeeper2
+      ZOOKEEPER_ZOOKEEPER0_HOST: zookeeper0
+      ZOOKEEPER_ZOOKEEPER0_CLIENT_PORT: 2181
+      ZOOKEEPER_ZOOKEEPER0_PEER_PORT: 2888
+      ZOOKEEPER_ZOOKEEPER0_LEADER_ELECTION_PORT: 3888
+      ZOOKEEPER_ZOOKEEPER1_HOST: zookeeper1
+      ZOOKEEPER_ZOOKEEPER1_CLIENT_PORT: 2181
+      ZOOKEEPER_ZOOKEEPER1_PEER_PORT: 2888
+      ZOOKEEPER_ZOOKEEPER1_LEADER_ELECTION_PORT: 3888
+      ZOOKEEPER_ZOOKEEPER2_HOST: zookeeper2
+      ZOOKEEPER_ZOOKEEPER2_CLIENT_PORT: 2181
+      ZOOKEEPER_ZOOKEEPER2_PEER_PORT: 2888
+      ZOOKEEPER_ZOOKEEPER2_LEADER_ELECTION_PORT: 3888
+networks:
+  poc:
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
+        gateway: 172.16.238.1

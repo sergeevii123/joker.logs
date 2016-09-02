@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  es:
+    image: elasticsearch:1.7.5
+    volumes:
+      - ./es:/usr/share/elasticsearch/config
+    ports:
+      - 9200:9200
+  logstash:
+    image: logstash:2.3
+    depends_on:
+      - es
+    links:
+      - es
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+      - kafka_1
+      - kafka_2
+      - kafka_3
+    ports:
+      - 5959:5959
+    volumes:
+      - ./logstash:/logstash
+    command: "logstash -f \"/logstash/*.conf\"  -w8 --pipeline-batch-size 1000 --auto-reload"
+  kibana:
+    image: kibana:4.1
+    links:
+      - es
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_URL: "http://es:9200"
+

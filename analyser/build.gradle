@@ -1,0 +1,14 @@
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.projectlombok:lombok"
+    compile "ch.qos.logback:logback-classic"
+    compile "net.logstash.logback:logstash-logback-encoder"
+    compile "org.codehaus.groovy:groovy-all"
+    compile "org.codehaus.groovy:groovy"
+    compile "org.apache.kafka:kafka-streams"
+    compile "org.apache.kafka:kafka-clients"
+//    compile "io.confluent:kafka-avro-serializer"
+    compile "joda-time:joda-time"
+    compile "org.apache.avro:avro"
+}

@@ -1,0 +1,75 @@
+version: '2'
+
+services:
+  kafka_1:
+    build: docker-kafka
+    ports:
+      - "9092:9092"
+      - "9997:9997"
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    links:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    environment:
+      JMX_PORT: 9997
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka_2:
+    build: docker-kafka
+    ports:
+      - "9093:9092"
+      - "9998:9998"
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    links:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    environment:
+      JMX_PORT: 9998
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka_3:
+    build: docker-kafka
+    ports:
+      - "9094:9092"
+      - "9999:9999"
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    links:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    environment:
+      JMX_PORT: 9999
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+      KAFKA_CREATE_TOPICS: "rsyslog_infra:3:2,rsyslog_apps:3:2"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka_manager:
+    image: sheepkiller/kafka-manager
+    ports:
+      - 9000:9000
+    links:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    environment:
+      JMX_PORT: 10000
+      ZK_HOSTS: zookeeper0:2181,zookeeper1:2182,zookeeper2:2181
+      KM_ARGS: -Djava.net.preferIPv4Stack=true
+
+

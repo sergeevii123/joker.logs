@@ -1,0 +1,73 @@
+version: '2'
+
+services:
+
+  rsyslog_base:
+      build: docker-rsyslog
+      depends_on:
+        - rsyslog_kafka_1
+        - rsyslog_kafka_2
+        - rsyslog_kafka_3
+      links:
+        - rsyslog_kafka_1
+        - rsyslog_kafka_2
+        - rsyslog_kafka_3
+      ports:
+        - "514:514/udp"
+        - "514:514"
+      environment:
+        RSYSLOG_HOSTS: "rsyslog_kafka_1:514,rsyslog_kafka_2:514,rsyslog_kafka_3:514"
+      volumes:
+        - ./docker-rsyslog/etc/rsyslog.conf:/tmp/rsyslog.conf
+
+  rsyslog_kafka_1:
+      build: docker-rsyslog-kafka
+      depends_on:
+        - kafka_1
+        - kafka_2
+        - kafka_3
+      links:
+        - kafka_1
+        - kafka_2
+        - kafka_3
+      ports:
+        - "515:514/udp"
+        - "515:514"
+      environment:
+        KAFKA_HOSTS: "kafka_1:9092,kafka_2:9092,kafka_3:9092"
+      volumes:
+        - ./docker-rsyslog-kafka/etc/rsyslog.conf:/tmp/rsyslog.conf
+
+  rsyslog_kafka_2:
+        build: docker-rsyslog-kafka
+        depends_on:
+          - kafka_1
+          - kafka_2
+          - kafka_3
+        links:
+          - kafka_1
+          - kafka_2
+          - kafka_3
+        ports:
+          - "516:514/udp"
+          - "516:514"
+        environment:
+          KAFKA_HOSTS: "kafka_1:9092,kafka_2:9092,kafka_3:9092"
+        volumes:
+          - ./docker-rsyslog-kafka/etc/rsyslog.conf:/tmp/rsyslog.conf
+
+  rsyslog_kafka_3:
+        build: docker-rsyslog-kafka
+        depends_on:
+          - kafka_1
+          - kafka_2
+          - kafka_3
+        links:
+          - kafka_1
+          - kafka_2
+          - kafka_3
+        ports:
+          - "517:514/udp"
+          - "517:514"
+        environment:
+          KAFKA_HOSTS: "kafka_1:9092,kafka_2:9092,kafka_3:9092"

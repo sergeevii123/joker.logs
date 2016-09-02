@@ -1,2 +1,4 @@
 rootProject.name = 'joker.log.analysis'
+include 'worker'
+include 'analyser'
 
