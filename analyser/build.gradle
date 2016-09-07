@@ -11,4 +11,5 @@ dependencies {
 //    compile "io.confluent:kafka-avro-serializer"
     compile "joda-time:joda-time"
     compile "org.apache.avro:avro"
+    compile "com.github.Ullink:simple-slack-api"
 }

@@ -1,4 +1,4 @@
-package joker.worker;
+package joker.demobaseinfo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-public class DoSomeWork {
+public class BaseInfoController {
 
-    @RequestMapping(value = "/work", method = RequestMethod.POST)
-    public void work() throws InterruptedException {
+    @RequestMapping(value = "/getInfo", method = RequestMethod.GET)
+    public String getInfo() throws InterruptedException {
         log.info("start");
         Thread.sleep(500);
         log.info("done");
+        return "base";
     }
 
 }

@@ -1,4 +1,6 @@
-rootProject.name = 'joker.log.analysis'
-include 'worker'
+rootProject.name = 'joker.logs'
+include 'democustomerinfo'
+include 'demobaseinfo'
+include 'demoadditionalinfo'
 include 'analyser'
 

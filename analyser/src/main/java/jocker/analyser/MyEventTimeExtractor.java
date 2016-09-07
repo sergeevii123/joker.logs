@@ -13,11 +13,6 @@ public class MyEventTimeExtractor implements TimestampExtractor {
 
     @Override
     public long extract(ConsumerRecord<Object, Object> record) {
-        // `Foo` is your own custom class, which we assume has a method that returns
-        // the embedded timestamp (in milliseconds).
-
-        // ((String) record.value).substring(0, ((String) record.value).indexOf(' '))
-
         DateTimeFormatter dateFormatter = ISODateTimeFormat.dateTimeParser();
         String stringValue = record.value().toString();
         DateTime dateTime = dateFormatter.parseDateTime(stringValue.substring(0, stringValue.indexOf(' ')));

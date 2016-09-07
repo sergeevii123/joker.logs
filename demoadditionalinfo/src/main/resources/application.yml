@@ -1,0 +1,21 @@
+spring:
+  application.name: additionalinfo
+  profiles.active: development, consul
+
+server.port: 8071
+---
+spring:
+  profiles: production
+
+
+spring.cloud.consul.discovery.preferIpAddress: true
+spring.cloud.consul.discovery.enabled: true
+spring.cloud.consul.discovery.healthCheckInterval: 1s
+
+---
+spring:
+  profiles: development
+  
+spring.cloud.consul.discovery.preferIpAddress: false
+spring.cloud.consul.discovery.enabled: false
+

@@ -1,0 +1,13 @@
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.cloud:spring-cloud-starter-feign"
+    compile "org.springframework.cloud:spring-cloud-starter-ribbon"
+    compile "org.springframework.cloud:spring-cloud-starter-consul-all"
+    compile "org.projectlombok:lombok"
+    compile "ch.qos.logback:logback-classic"
+    compile "net.logstash.logback:logstash-logback-encoder:4.7"
+    compile "org.codehaus.groovy:groovy-all"
+    compile "org.codehaus.groovy:groovy"
+    compile "io.reactivex:rxjava"
+}

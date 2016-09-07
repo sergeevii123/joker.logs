@@ -9,7 +9,7 @@ import net.logstash.logback.stacktrace.ShortenedThrowableConverter
 
 import static ch.qos.logback.classic.Level.*
 
-def appInstanceName = "worker"
+def appInstanceName = "customerinfo"
 def TAGS = "forwarding,json"
 def rHost = "192.168.99.100"
 def rPort = 514
@@ -37,7 +37,7 @@ appender("RSYSLOG_APPENDER", LogstashTcpSocketAppender) {
         throwableConverter = baseConv
         prefix(LayoutWrappingEncoder) {
             layout(PatternLayout) {
-                pattern="%syslogStart{USER}" + appInstanceName +"/apps," + TAGS + " key=\"applog\""
+                pattern="%syslogStart{USER}" + appInstanceName +"/apps," + TAGS
             }
         }
     }
@@ -49,6 +49,6 @@ logger('org.springframework.web.servlet', OFF)
 logger('org.springframework.security.web', OFF)
 logger('org.springframework.context.support', OFF)
 
-logger("joker.worker", INFO, ["STDOUT", "RSYSLOG_APPENDER"], false)
+logger("joker.democustomerinfo", INFO, ["STDOUT", "RSYSLOG_APPENDER"], false)
 
 root(INFO, ["RSYSLOG_APPENDER", "STDOUT"])
