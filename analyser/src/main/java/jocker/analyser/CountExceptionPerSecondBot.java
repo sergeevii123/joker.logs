@@ -23,7 +23,7 @@ public class CountExceptionPerSecondBot {
         settings.put(StreamsConfig.ZOOKEEPER_CONNECT_CONFIG, "192.168.99.100:2182");
         settings.put(StreamsConfig.TIMESTAMP_EXTRACTOR_CLASS_CONFIG,  MyEventTimeExtractor.class.getName());
 
-        SlackSession session = SlackSessionFactory.createWebSocketSlackSession("xoxb-77064816199-66jVEUcogKW7ROd1HPQlytpH");
+        SlackSession session = SlackSessionFactory.createWebSocketSlackSession("");
         session.connect();
         SlackChannel channel = session.findChannelByName("general");
 

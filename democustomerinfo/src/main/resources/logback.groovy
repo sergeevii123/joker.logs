@@ -37,7 +37,7 @@ appender("RSYSLOG_APPENDER", LogstashTcpSocketAppender) {
         throwableConverter = baseConv
         prefix(LayoutWrappingEncoder) {
             layout(PatternLayout) {
-                pattern="%syslogStart{USER}" + appInstanceName +"/apps," + TAGS
+                pattern="%syslogStart{USER}" + appInstanceName +"/apps," + TAGS + " "
             }
         }
     }

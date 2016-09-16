@@ -11,6 +11,9 @@ buildscript {
     repositories {
         mavenCentral()
         jcenter()
+        maven{ url "https://plugins.gradle.org/m2/" }
+        maven { url 'http://mvn/content/groups/public' }
+        mavenLocal()
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
@@ -33,10 +36,9 @@ subprojects {
     apply plugin: 'spring-boot'
     apply plugin: 'io.spring.dependency-management'
 
-//    ext {
-//        springBootVersion = '1.4.0.RELEASE'
-//        dockerPluginVersion = '3.0.2'
-//    }
+    ext {
+        springBootVersion = '1.4.0.RELEASE'
+    }
 
     docker {
         url = "https://192.168.99.100:2376"
@@ -50,14 +52,16 @@ subprojects {
 
     repositories {
         maven { url "https://jitpack.io" }
-        mavenCentral()
+        jcenter()
+        maven{ url "https://plugins.gradle.org/m2/" }
+        maven { url 'http://mvn/content/groups/public' }
+        mavenLocal()
     }
 
     dependencyManagement {
 
         dependencies {
             dependency "org.springframework.boot:spring-boot:${springBootVersion}"
-            dependency "org.springframework.cloud:spring-cloud-starter-ribbon:1.0.6.RELEASE"
             dependency "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
             dependency "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
             dependency "net.logstash.logback:logstash-logback-encoder:4.7"
@@ -66,13 +70,12 @@ subprojects {
             dependency "io.confluent:kafka-avro-serializer:3.0.0"
             dependency "org.apache.avro:avro:1.7.7"
             dependency "joda-time:joda-time:2.9.4"
-            dependency "org.springframework.cloud:spring-cloud-starter-feign:1.1.5.RELEASE"
-            dependency "org.springframework.boot:spring-boot-starter-actuator:1.4.0.RELEASE"
-            dependency "org.springframework.cloud:spring-cloud-starter-hystrix:1.1.5.RELEASE"
+            dependency "org.springframework.cloud:spring-cloud-starter-feign:1.0.6.RELEASE"
+            dependency "org.springframework.cloud:spring-cloud-starter-ribbon:1.0.6.RELEASE"
+            dependency "org.springframework.cloud:spring-cloud-starter-hystrix:1.0.6.RELEASE"
             dependency "org.springframework.cloud:spring-cloud-starter-consul-all:1.0.2.RELEASE"
             dependency "org.projectlombok:lombok:1.16.10"
             dependency "ch.qos.logback:logback-classic:1.1.7"
-            dependency "net.logstash.logback:logstash-logback-encoder:4.7"
             dependency 'com.netflix.feign:feign-core:8.16.0'
             dependency "org.codehaus.groovy:groovy:2.4.4"
             dependency "org.slf4j:jcl-over-slf4j:1.7.12"

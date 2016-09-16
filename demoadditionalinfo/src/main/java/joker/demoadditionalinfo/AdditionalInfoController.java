@@ -19,12 +19,12 @@ public class AdditionalInfoController {
     @RequestMapping(value = "/getInfo", method = RequestMethod.GET)
     public String work() throws InterruptedException {
         log.info("start");
-        Thread.sleep(500);
         if (r.nextInt(3) == 2) {
             //simulating exception
             log.info("exception");
             return "";
         }
+        Thread.sleep(500);
         log.info("done");
         return "additional";
     }

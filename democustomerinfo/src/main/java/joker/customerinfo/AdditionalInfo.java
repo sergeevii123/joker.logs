@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @FeignClient("additionalinfo")
 public interface AdditionalInfo {
-    @RequestMapping(value = "/getInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/getInfo", method = RequestMethod.GET, consumes = "text/plain")
     String getAdditionalInfo();
 }

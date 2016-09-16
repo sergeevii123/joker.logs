@@ -22,9 +22,10 @@ public class CustomerInfoController {
     @RequestMapping(value = "/getInfo", method = RequestMethod.GET)
     public String getInfo() {
         log.info("start");
-//        String a = baseInfo.getBaseInfo();
-        return additionalInfo.getAdditionalInfo();
-//        return a + b;
+        baseInfo.getBaseInfo();
+        additionalInfo.getAdditionalInfo();
+        log.info("done");
+        return "done";
     }
 
 }
