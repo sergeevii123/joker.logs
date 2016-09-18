@@ -1,4 +1,4 @@
-package jocker.analyser;
+package jocker.analyser.util;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.streams.processor.TimestampExtractor;

@@ -7,6 +7,7 @@ buildscript {
     ext {
         springBootVersion = '1.4.0.RELEASE'
         dockerPluginVersion = '2.6.1'
+        springCloudVersion = 'Brixton.SR4'
     }
     repositories {
         mavenCentral()
@@ -36,10 +37,6 @@ subprojects {
     apply plugin: 'spring-boot'
     apply plugin: 'io.spring.dependency-management'
 
-    ext {
-        springBootVersion = '1.4.0.RELEASE'
-    }
-
     docker {
         url = "https://192.168.99.100:2376"
 
@@ -60,23 +57,20 @@ subprojects {
 
     dependencyManagement {
 
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+
         dependencies {
-            dependency "org.springframework.boot:spring-boot:${springBootVersion}"
-            dependency "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
-            dependency "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
             dependency "net.logstash.logback:logstash-logback-encoder:4.7"
             dependency "org.apache.kafka:kafka-streams:0.10.0.1"
             dependency "org.apache.kafka:kafka-clients:0.10.0.1"
+//            dependency "org.apache.kafka:kafka_2.10:0.10.0.1"
             dependency "io.confluent:kafka-avro-serializer:3.0.0"
             dependency "org.apache.avro:avro:1.7.7"
             dependency "joda-time:joda-time:2.9.4"
-            dependency "org.springframework.cloud:spring-cloud-starter-feign:1.0.6.RELEASE"
-            dependency "org.springframework.cloud:spring-cloud-starter-ribbon:1.0.6.RELEASE"
-            dependency "org.springframework.cloud:spring-cloud-starter-hystrix:1.0.6.RELEASE"
-            dependency "org.springframework.cloud:spring-cloud-starter-consul-all:1.0.2.RELEASE"
             dependency "org.projectlombok:lombok:1.16.10"
             dependency "ch.qos.logback:logback-classic:1.1.7"
-            dependency 'com.netflix.feign:feign-core:8.16.0'
             dependency "org.codehaus.groovy:groovy:2.4.4"
             dependency "org.slf4j:jcl-over-slf4j:1.7.12"
             dependency "org.codehaus.groovy:groovy-all:2.4.4"

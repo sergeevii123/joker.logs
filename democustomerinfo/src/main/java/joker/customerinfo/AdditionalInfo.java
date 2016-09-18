@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Created by ilya on 15.02.16.
  */
+//@FeignClient(url="${additionalInfo}", name= "additionalinfo")
 @FeignClient("additionalinfo")
 public interface AdditionalInfo {
-    @RequestMapping(value = "/getInfo", method = RequestMethod.GET, consumes = "text/plain")
+    @RequestMapping(value = "/getInfo", method = RequestMethod.GET)
     String getAdditionalInfo();
 }

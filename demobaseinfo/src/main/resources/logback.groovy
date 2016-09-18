@@ -15,9 +15,9 @@ def rHost = "192.168.99.100"
 def rPort = 514
 
 def baseConv = ShortenedThrowableConverter.newInstance(
-        [maxDepthPerThrowable    : 30,
-         maxLength               : 2048,
-         shortenedClassNameLength: 20,
+        [maxDepthPerThrowable    : 60,
+         maxLength               : 4048,
+         shortenedClassNameLength: 40,
          excludes                : [],
          rootCauseFirst          : true]
 )
@@ -37,7 +37,7 @@ appender("RSYSLOG_APPENDER", LogstashTcpSocketAppender) {
         throwableConverter = baseConv
         prefix(LayoutWrappingEncoder) {
             layout(PatternLayout) {
-                pattern="%syslogStart{USER}" + appInstanceName +"/apps," + TAGS + " "
+                pattern="%syslogStart{USER}" + appInstanceName + "/" + TAGS + " "
             }
         }
     }

@@ -5,16 +5,8 @@ spring:
 server.port: 8070
 ---
 spring:
-  profiles: production
-
-
-spring.cloud.consul.discovery.preferIpAddress: true
-spring.cloud.consul.discovery.enabled: true
-spring.cloud.consul.discovery.healthCheckInterval: 1s
-
----
-spring:
   profiles: development
-  
-spring.cloud.consul.discovery.preferIpAddress: false
-spring.cloud.consul.discovery.enabled: false
+
+additionalInfo: 192.168.99.100:8071
+baseInfo: 192.168.99.100:8072
+feign.hystrix.enabled: false

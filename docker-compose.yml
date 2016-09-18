@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+  consul:
+    image: progrium/consul
+    container_name: consul
+    ports:
+      - "8500:8500"
+    command: "-server -bootstrap -ui-dir /ui"
+    restart: always
+
+  additionalinfo:
+    image: joker.logs/demoadditionalinfo
+    ports:
+      - "8071:8071"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=production"
+      - "SPRING_CLOUD_CONSUL_HOST=192.168.99.100"
+      - "SPRING_CLOUD_CONSUL_DISCOVERY_IP_ADDRESS=192.168.99.100"
+      - "SPRING_CLOUD_CONSUL_DISCOVERY_PORT=8071"
+    volumes_from:
+      - consul
+
+  baseinfo:
+    image: joker.logs/demobaseinfo
+    ports:
+      - "8072:8072"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=production"
+      - "SPRING_CLOUD_CONSUL_HOST=192.168.99.100"
+      - "SPRING_CLOUD_CONSUL_DISCOVERY_IP_ADDRESS=192.168.99.100"
+      - "SPRING_CLOUD_CONSUL_DISCOVERY_PORT=8072"
+    volumes_from:
+      - consul
+
+  customerinfo:
+    image: joker.logs/democustomerinfo
+    ports:
+      - "8070:8070"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=production"
+      - "SPRING_CLOUD_CONSUL_HOST=192.168.99.100"
+      - "SPRING_CLOUD_CONSUL_DISCOVERY_IP_ADDRESS=192.168.99.100"
+      - "SPRING_CLOUD_CONSUL_DISCOVERY_PORT=8070"
+    volumes_from:
+      - consul

@@ -3,17 +3,3 @@ spring:
   profiles.active: development, consul
 
 server.port: 8072
----
-spring:
-  profiles: production
-
-
-spring.cloud.consul.discovery.preferIpAddress: true
-spring.cloud.consul.discovery.enabled: true
-spring.cloud.consul.discovery.healthCheckInterval: 1s
-
----
-spring:
-  profiles: development
-
-spring.cloud.consul.discovery.enabled: false

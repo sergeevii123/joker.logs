@@ -8,8 +8,10 @@ dependencies {
     compile "org.codehaus.groovy:groovy"
     compile "org.apache.kafka:kafka-streams"
     compile "org.apache.kafka:kafka-clients"
-//    compile "io.confluent:kafka-avro-serializer"
     compile "joda-time:joda-time"
     compile "org.apache.avro:avro"
     compile "com.github.Ullink:simple-slack-api"
+//    compile "org.apache.kafka:kafka_2.10"
 }
+
+mainClassName = 'jocker.analyser.streams.FilterException'
