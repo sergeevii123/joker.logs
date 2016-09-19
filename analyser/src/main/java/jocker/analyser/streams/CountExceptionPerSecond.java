@@ -15,7 +15,7 @@ import java.util.Properties;
 public class CountExceptionPerSecond {
     public static void main(String[] args) {
         Properties settings = new Properties();
-        settings.put(StreamsConfig.APPLICATION_ID_CONFIG, "count-exception-per-second1");
+        settings.put(StreamsConfig.APPLICATION_ID_CONFIG, "count-exception-per-second");
         settings.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.99.100:9092");
         settings.put(StreamsConfig.ZOOKEEPER_CONNECT_CONFIG, "192.168.99.100:2182");
         settings.put(StreamsConfig.TIMESTAMP_EXTRACTOR_CLASS_CONFIG, MyEventTimeExtractor.class.getName());

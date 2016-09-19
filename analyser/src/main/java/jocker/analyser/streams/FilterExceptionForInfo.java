@@ -13,11 +13,11 @@ import java.util.Properties;
 /**
  * Created by ilyasergeev on 23/08/16.
  */
-public class FilterExceptionForAggregator {
+public class FilterExceptionForInfo {
 
     public static void main(String[] args) {
         Properties settings = new Properties();
-        settings.put(StreamsConfig.APPLICATION_ID_CONFIG, "filter-exceptions-for-aggregator");
+        settings.put(StreamsConfig.APPLICATION_ID_CONFIG, "filter-exceptions-for-info");
         settings.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.99.100:9092");
         settings.put(StreamsConfig.ZOOKEEPER_CONNECT_CONFIG, "192.168.99.100:2182");
         settings.put(StreamsConfig.TIMESTAMP_EXTRACTOR_CLASS_CONFIG,  MyEventTimeExtractor.class.getName());
@@ -26,11 +26,17 @@ public class FilterExceptionForAggregator {
         KStreamBuilder kStreamBuilder = new KStreamBuilder();
 
         KStream<String, String> kStream =  kStreamBuilder.stream(
-                new Serdes.StringSerde(), new Serdes.StringSerde(), "administration");
+                new Serdes.StringSerde(), new Serdes.StringSerde(),"info");
 
-        kStream.filter((k, v) -> v.contains("exception with zip"))
-                .to(Serdes.String(), Serdes.String(), "exceptions");
+        kStream.filter((k, v) -> v.contains("exception")).process(() -> new AbstractProcessor<String, String>() {
+                        @Override
+            public void process(String key, String value) {
+                System.out.println("\u001B[31m" + key + "\u001B[0m" + " " + value);
+            }
+        });
 
+//        kStream.filter((k, v) -> v.contains("exception"))
+//                .to(Serdes.String(), Serdes.String(), "exceptions");
 
         KafkaStreams kafkaStreams = new KafkaStreams(kStreamBuilder, config);
         kafkaStreams.start();
