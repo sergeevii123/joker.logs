@@ -10,6 +10,9 @@ import org.apache.kafka.streams.processor.AbstractProcessor;
 
 import java.util.Properties;
 
+import static jocker.analyser.util.Colors.BLACK;
+import static jocker.analyser.util.Colors.RED;
+
 /**
  * Created by ilyasergeev on 23/08/16.
  */
@@ -31,7 +34,7 @@ public class FilterExceptionForInfo {
         kStream.filter((k, v) -> v.contains("exception")).process(() -> new AbstractProcessor<String, String>() {
                         @Override
             public void process(String key, String value) {
-                System.out.println("\u001B[31m" + key + "\u001B[0m" + " " + value);
+                System.out.println(RED + key + BLACK + " " + value);
             }
         });
 

@@ -9,6 +9,9 @@ import org.apache.kafka.streams.processor.AbstractProcessor;
 
 import java.util.Properties;
 
+import static jocker.analyser.util.Colors.BLACK;
+import static jocker.analyser.util.Colors.RED;
+
 /**
  * Created by ilyasergeev on 07/09/16.
  */
@@ -35,11 +38,9 @@ public class CountExceptionPerSecond {
                 .process(() -> new AbstractProcessor<String, Long>() {
                     @Override
                     public void process(String key, Long value) {
-                        System.out.println("exception " + "\u001B[31m" + key + "\u001B[0m" + " " + value);
+                        System.out.println("exception " + RED + key + BLACK + " " + value);
                     }
                 });
-
-//        exceptionCounts.toStream((k,v) -> k.key()).to(Serdes.String(), Serdes.Long(), "expersec");
 
         KafkaStreams kafkaStreams = new KafkaStreams(kStreamBuilder, config);
         kafkaStreams.start();

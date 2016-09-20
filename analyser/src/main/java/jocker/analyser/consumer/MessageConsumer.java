@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.Random;
 
+import static jocker.analyser.util.Colors.BLACK;
+import static jocker.analyser.util.Colors.RED;
+
 /**
  * Created by ilyasergeev on 17/09/16.
  */
@@ -36,7 +39,7 @@ public class MessageConsumer {
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(100);
                 for (ConsumerRecord<String, String> record : records) {
-                    out.println("\u001B[31m" + record.key() + "\u001B[0m" + " " + record.value());
+                    out.println(RED + record.key() + BLACK + " " + record.value());
                     out.flush();
                 }
             }

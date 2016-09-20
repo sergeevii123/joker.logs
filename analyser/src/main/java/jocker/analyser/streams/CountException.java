@@ -11,6 +11,9 @@ import org.apache.kafka.streams.processor.WallclockTimestampExtractor;
 
 import java.util.Properties;
 
+import static jocker.analyser.util.Colors.BLACK;
+import static jocker.analyser.util.Colors.RED;
+
 /**
  * Created by ilyasergeev on 07/09/16.
  */
@@ -32,7 +35,7 @@ public class CountException {
                 toStream().process(() -> new AbstractProcessor<String, Long>() {
             @Override
             public void process(String key, Long value) {
-                System.out.println("exception " + "\u001B[31m" + key + "\u001B[0m" + " " + value);
+                System.out.println("exception " + RED + key + BLACK + " " + value);
             }
         });
 

@@ -12,6 +12,9 @@ import org.apache.kafka.streams.processor.AbstractProcessor;
 
 import java.util.Properties;
 
+import static jocker.analyser.util.Colors.BLACK;
+import static jocker.analyser.util.Colors.RED;
+
 /**
  * Created by ilyasergeev on 07/09/16.
  */
@@ -42,10 +45,18 @@ public class MergeInfoWithAdministration {
 
             @Override
             public void process(String key, String value) {
-                System.out.println("\u001B[31m" + key + "\u001B[0m" + " " + value);
+                System.out.println(RED + key + BLACK + " " + value);
             }
 
         });
+
+//        kStream.outerJoin(kStreamAdm,
+//                (value1, value2) -> value1 != null ? value1 : value2,
+//                JoinWindows.of("window").with(1000L),
+//                Serdes.String(),
+//                Serdes.String(),
+//                Serdes.String())
+//                .to(Serdes.String(), Serdes.String(), "mergeinfoadministration");
 
         KafkaStreams kafkaStreams = new KafkaStreams(kStreamBuilder, config);
         kafkaStreams.start();
