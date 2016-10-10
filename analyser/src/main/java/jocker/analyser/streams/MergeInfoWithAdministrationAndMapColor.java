@@ -57,20 +57,6 @@ public class MergeInfoWithAdministrationAndMapColor {
 
         });
 
-//        kStream.outerJoin(kStreamAdm,
-//                (value1, value2) -> value1 != null ? value1 : value2,
-//                JoinWindows.of("window").with(1000L),
-//                Serdes.String(),
-//                Serdes.String(),
-//                Serdes.String())
-//                .map((key, value) -> {
-//                    switch (key){
-//                        case "baseinfo" : return new KeyValue<>(key, YELLOW + value + BLACK);
-//                        case "additionalinfo" : return new KeyValue<>(key, BLUE + value + BLACK);
-//                        case "customerinfo" : return new KeyValue<>(key, PURPLE + value + BLACK);
-//                        default: return new KeyValue<>(key, "strange");
-//                    }
-//                }).to(Serdes.String(), Serdes.String(), "mergeinfoadministrationandmapcolor");
 
         KafkaStreams kafkaStreams = new KafkaStreams(kStreamBuilder, config);
         kafkaStreams.start();

@@ -50,13 +50,6 @@ public class MergeInfoWithAdministration {
 
         });
 
-//        kStream.outerJoin(kStreamAdm,
-//                (value1, value2) -> value1 != null ? value1 : value2,
-//                JoinWindows.of("window").with(1000L),
-//                Serdes.String(),
-//                Serdes.String(),
-//                Serdes.String())
-//                .to(Serdes.String(), Serdes.String(), "mergeinfoadministration");
 
         KafkaStreams kafkaStreams = new KafkaStreams(kStreamBuilder, config);
         kafkaStreams.start();

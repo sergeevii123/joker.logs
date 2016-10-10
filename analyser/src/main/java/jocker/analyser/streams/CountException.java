@@ -1,6 +1,7 @@
 package jocker.analyser.streams;
 
 import jocker.analyser.util.MyEventTimeExtractor;
+import jocker.analyser.util.StringKeyLongValueToConsole;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsConfig;
@@ -31,16 +32,10 @@ public class CountException {
         KStream<String, String> kStream =  kStreamBuilder.stream(
                 new Serdes.StringSerde(), new Serdes.StringSerde(), "info");
 
-        kStream.filter((k, v) -> v.contains("exception")).countByKey(Serdes.String(), "tableForCountExceptions").
-                toStream().process(() -> new AbstractProcessor<String, Long>() {
-            @Override
-            public void process(String key, Long value) {
-                System.out.println("exception " + RED + key + BLACK + " " + value);
-            }
-        });
-
-//        kStream.filter((k, v) -> v.contains("exception")).countByKey(Serdes.String(), "").
-//                toStream().to(Serdes.String(), Serdes.Long(), "exceptioncount");
+        kStream.filter((k, v) -> v.contains("exception"))
+                .countByKey(Serdes.String(), "tableForCountExceptions")
+                .toStream()
+                .process(StringKeyLongValueToConsole::new);
 
         KafkaStreams kafkaStreams = new KafkaStreams(kStreamBuilder, config);
         kafkaStreams.start();

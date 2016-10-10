@@ -34,19 +34,21 @@ public class CountExceptionPerSecondBot {
         KStream<String, String> kStream = kStreamBuilder.stream(
                 new Serdes.StringSerde(), new Serdes.StringSerde(), "info");
 
-        kStream.filter((k, v) -> v.contains("exception")).
-                countByKey(
+        kStream.filter((k, v) -> v.contains("exception"))
+                .countByKey(
                         TimeWindows.of("window", 1000L)
                                 .advanceBy(500L),
                         Serdes.String())
                 .toStream((k, v) -> k.key())
                 .process(() -> new AbstractProcessor<String, Long>() {
+
                     @Override
                     public void process(String key, Long value) {
                         String info = "exception " + key + " " + value;
                         System.out.println(info);
                         if (value > 3) session.sendMessage(channel, info);
                     }
+
                 });
 
         KafkaStreams kafkaStreams = new KafkaStreams(kStreamBuilder, config);
