@@ -9,7 +9,7 @@ import net.logstash.logback.stacktrace.ShortenedThrowableConverter
 
 import static ch.qos.logback.classic.Level.*
 
-def appInstanceName = "CustomerInfo"
+def appInstanceName = "TransactionsList"
 def TAGS = "forwarding,json"
 def rHost = "192.168.99.100"
 def rPort = 514
@@ -49,6 +49,6 @@ logger('org.springframework.web.servlet', OFF)
 logger('org.springframework.security.web', OFF)
 logger('org.springframework.context.support', OFF)
 
-logger("joker.democustomerinfo", INFO, ["STDOUT", "RSYSLOG_APPENDER"], false)
+logger("joker.demotransactionslist", INFO, ["STDOUT", "RSYSLOG_APPENDER"], false)
 
 root(INFO, ["RSYSLOG_APPENDER", "STDOUT"])

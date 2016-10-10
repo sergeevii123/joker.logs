@@ -1,0 +1,5 @@
+spring:
+  application.name: TransactionsList
+  profiles.active: development, consul
+
+server.port: 8071

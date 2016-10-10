@@ -9,8 +9,8 @@ services:
     command: "-server -bootstrap -ui-dir /ui"
     restart: always
 
-  additionalinfo:
-    image: joker.logs/demoadditionalinfo
+  transactionslist:
+    image: joker.logs/demotransactionslist
     ports:
       - "8071:8071"
     environment:
@@ -21,8 +21,8 @@ services:
     volumes_from:
       - consul
 
-  baseinfo:
-    image: joker.logs/demobaseinfo
+  customerinfo:
+    image: joker.logs/democustomerinfo
     ports:
       - "8072:8072"
     environment:
@@ -33,8 +33,8 @@ services:
     volumes_from:
       - consul
 
-  customerinfo:
-    image: joker.logs/democustomerinfo
+  dashboardapi:
+    image: joker.logs/demodashboardapi
     ports:
       - "8070:8070"
     environment:

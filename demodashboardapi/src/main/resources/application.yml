@@ -1,0 +1,12 @@
+spring:
+  application.name: DashboardAPI
+  profiles.active: development, consul
+
+server.port: 8070
+---
+spring:
+  profiles: development
+
+additionalInfo: 192.168.99.100:8071
+baseInfo: 192.168.99.100:8072
+feign.hystrix.enabled: false

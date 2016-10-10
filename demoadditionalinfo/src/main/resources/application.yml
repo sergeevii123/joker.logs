@@ -1,5 +1,0 @@
-spring:
-  application.name: additionalinfo
-  profiles.active: development, consul
-
-server.port: 8071

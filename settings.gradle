@@ -1,6 +1,5 @@
 rootProject.name = 'joker.logs'
 include 'democustomerinfo'
-include 'demobaseinfo'
-include 'demoadditionalinfo'
+include 'demodashboardapi'
+include 'demotransactionslist'
 include 'analyser'
-

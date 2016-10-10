@@ -1,2 +1,0 @@
-spring.cloud.consul.discovery.enabled: true
-spring.cloud.consul.discovery.healthCheckInterval: 1s
