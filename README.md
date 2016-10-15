@@ -10,4 +10,4 @@ gradle clean build && gradle :democustomerinfo:dBI && gradle :demotransactionsli
 
 ### call DashboardAPI
 
-curl -X GET "http://<Your DOCKER-MACHINE IP >:8070/getInfo"
+curl -X GET "http://\<Your DOCKER-MACHINE IP \>:8070/getInfo"
