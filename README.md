@@ -7,3 +7,7 @@ gradle clean build && gradle :democustomerinfo:dBI && gradle :demotransactionsli
 ### start demo
 
 ./compose-logs.sh up -d
+
+### call DashboardAPI
+
+curl -X GET "http://<Your DOCKER-MACHINE IP >:8070/getInfo"
